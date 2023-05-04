@@ -5,7 +5,9 @@
 
 	<div class="catalogue">
 		{{ range (.Paginate .Site.RegularPages).Pages }}
-			{{ .Render "summary" }}
+			{{ if not .Params.unlisted }}
+				{{ .Render "summary" }}
+			{{ end }}
 		{{ end }}
 	</div>
 
