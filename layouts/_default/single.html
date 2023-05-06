@@ -9,7 +9,9 @@
 
 		{{ partial "single/header.html" . }}
 
-		{{ .Content }}
+		{{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }}
+
+		{{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 
 		{{ partial "single/footer.html" . }}
 	</div>
