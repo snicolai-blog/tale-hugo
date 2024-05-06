@@ -64,7 +64,7 @@
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{- with $authorEmail }}<author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>{{ end }}
       <guid>{{ .Permalink }}</guid>
-      <description>{{- if .Site.Config.Services.RSS.FullContent }}{{ .Content | transform.XMLEscape | safeHTML }}{{- else }}{{ .Summary | transform.XMLEscape | safeHTML }}{{- end }}</description>
+      <description>{{- if .Site.Params.RSSFullContent }}{{ .Content | transform.XMLEscape | safeHTML }}{{- else }}{{ .Summary | transform.XMLEscape | safeHTML }}{{- end }}</description>
     </item>
     {{- end }}
   </channel>
