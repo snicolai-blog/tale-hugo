@@ -13,13 +13,13 @@ This is a port of the [Tale theme for Jekyll](https://github.com/chesterhow/tale
 If your site is also under version control using git, the easiest way to install this theme is to add it as a submodule. If you have not created a git repo for your project yet, you need to run `git init` beforehand. Inside the folder of your Hugo site, run the following command.
 
 ```
-git submodule add https://github.com/EmielH/tale-hugo.git themes/tale
+git submodule add https://github.com/snicolai-blog/tale-hugo.git themes/tale
 ```
 
 Alternatively, you can clone the theme into your project.
 
 ```
-git clone https://github.com/EmielH/tale-hugo.git themes/tale
+git clone https://github.com/snicolai-blog/tale-hugo.git themes/tale
 ```
 
 ### 2. Configure Hugo
@@ -116,12 +116,28 @@ comments: true
 
 ### Google Analytics
 
-Tale supports Google Analytics integration using Hugo's provided `google_analytics_async` template.
+Tale supports Google Analytics integration using Hugo's provided `google_analytics` template.
 
 To enable it, add the `googleAnalytics` tag to your `config.toml`. It will be added on all pages.
 
 ```toml
 googleAnalytics = "UA-133700000-0"
+```
+
+### Dark Mode Toggle
+
+Adds a control on every page to toggle between normal and dark mode.
+
+```toml
+DarkModeToggle = true
+```
+
+### RSS Full Content
+
+```toml
+[Services]
+  [Services.RSS]
+    FullContent = true
 ```
 
 ### Custom summaries

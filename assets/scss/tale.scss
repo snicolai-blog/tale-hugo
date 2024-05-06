@@ -8,3 +8,39 @@
 @import 'tale/pagination';
 @import 'tale/catalogue';
 @import 'tale/disqus';
+
+
+.catalogue {
+    &-item-text {
+      border-bottom: none;
+      color: #555;
+    }
+}
+
+.catalogue-readmore {
+    display: flex; 
+    justify-content: flex-end;
+}
+
+.list-post {
+  padding: 2px;
+}
+
+video {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  max-width: 720px;
+}
+
+audio {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  max-width: 720px;
+}
+    

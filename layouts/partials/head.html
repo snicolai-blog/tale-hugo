@@ -1,6 +1,6 @@
 <head>
 		<!-- Google Analytics -->
-		{{ template "_internal/google_analytics_async.html" . }}
+		{{ template "_internal/google_analytics.html" . }}
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{{- if .IsHome }}
@@ -12,7 +12,7 @@
 		<title>{{- if .IsHome }}{{ .Site.Title }}{{- else }}{{ .Title }} &middot; {{ .Site.Title }}{{- end }}</title>
 
 		<!-- CSS -->
-		{{- $inServerMode	:= .Site.IsServer }}
+		{{- $inServerMode	:= .hugo.IsServer }}
 		{{- $cssTarget		:= "css/style.css" }}
 		{{- $cssOptions		:= cond ($inServerMode) (dict "targetPath" $cssTarget "enableSourceMap" true) (dict "targetPath" $cssTarget "outputStyle" "compressed") }}
 		{{- $style			:= resources.Get "scss/tale.scss" | toCSS $cssOptions }}
@@ -31,5 +31,5 @@
 		<!-- RSS -->
 		<link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
 
-		<script src="{{ "js/darkmode.js" | relURL }}"></script>
+		{{- if .Site.Params.DarkModeToggle }}<script src="{{ "js/darkmode.js" | relURL }}"></script>{{- end }}
 	</head>

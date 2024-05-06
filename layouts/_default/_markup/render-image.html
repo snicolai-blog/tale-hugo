@@ -1,0 +1,48 @@
+{{- /* get file that matches the filename as specified as src="" in shortcode */ -}}
+{{- $src := .Page.Resources.GetMatch (printf "%s" (.Destination)) -}}
+{{- if $src -}}
+
+{{- $imgWidth := $src.Width -}}
+{{- $imgHeight := $src.Height -}}
+{{- with $src.Exif -}}
+  {{- $o := .Tags.Orientation -}}
+  {{- if or (eq $o 6) (eq $o 8) -}}
+    {{- $imgWidth = $src.Height -}}
+    {{- $imgHeight = $src.Width -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $scratch := newScratch -}} 
+{{- /* only use images smaller than or equal to the src (original) image size, as Hugo will upscale small images */ -}}
+<figure>
+<img loading="lazy"
+  style='aspect-ratio: {{- $imgWidth -}}/{{- $imgHeight -}}'
+  sizes='(max-width: 800px) 96vw, 768px'
+  srcset='
+  {{- $page := .Page -}}
+  {{- range .Page.Site.Params.ImageBreaks -}}
+    {{- $size := . }}
+    {{- if ge $imgWidth $size -}}
+      {{- $path := replaceRE ".[jJ][pP][gG]$" (printf "_%sw%s" $size (path.Ext $src.Name)) $src.Name -}}
+      {{- with $s := $page.Resources.GetMatch (printf "processed/%s" $path) -}}
+        {{- with $s.RelPermalink }}{{.}} {{$size}}w,
+          {{- if lt $size 800 -}}
+            {{- $scratch.Set "src" $s.RelPermalink -}}
+          {{- end -}}
+        {{ end -}}
+      {{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $src }}{{ .RelPermalink }} {{ $imgWidth }}w{{ end }}' 
+  {{ with $scratch.Get "src" -}}
+    src='{{- . -}}'
+  {{- else -}}
+    src='{{- $src.RelPermalink -}}'
+  {{- end -}}
+  {{- with .Text }} alt="{{- . | safeHTMLAttr -}}"{{ else }}alt=""{{ end }}>
+  <figcaption>{{- with .Title }}{{ . | safeHTML}}{{ else }}{{ with .Text }}{{ . | safeHTML }}{{ end }}{{ end }}</figcaption>
+</figure>
+
+{{- else }}
+{{- errorf .Destination " does not exist" .Page.Title }}
+{{- end }}

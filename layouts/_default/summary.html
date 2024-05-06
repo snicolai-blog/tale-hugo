@@ -1,11 +1,15 @@
-<a href="{{ .Permalink }}" class="catalogue-item">
-    <div>
-        <time datetime="{{ .PublishDate }}" class="catalogue-time">{{ i18n "publishdate" . }}</time>
-        <h2 class="catalogue-title">{{ .Title }}</h2>
+<div class="catalogue-item">
+    <a class="catalogue-item-text" href="{{ .RelPermalink }}">
+            <time datetime="{{ .PublishDate }}" class="catalogue-time">{{ i18n "publishdate" . }}</time>
+        <h1 class="catalogue-title">{{ .Title }}</h1>
         <div class="catalogue-line"></div>
 
         <p>
             {{ if isset .Params "summary" }}{{ .Params.Summary | markdownify }}{{ else }}{{ .Summary }}{{ end }}
         </p>
-    </div>
-</a>
+    </a>
+    {{ if .Truncated }}
+        <!-- include a read more link, but only if the summary is truncated... -->
+        <a class="catalogue-readmore" href="{{ .RelPermalink }}">{{ i18n "readmore" | safeHTML }}Read More…</a>
+     {{ end }}
+</div>
