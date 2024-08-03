@@ -12,3 +12,6 @@ other = "{{ .PublishDate.Day }}. {{ index $.Site.Data.months_de (printf \"%d\" .
 
 [readmore]
 other = "Mehr lesen…"
+
+[draft]
+other = "Abriss"

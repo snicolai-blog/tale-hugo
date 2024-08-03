@@ -12,3 +12,6 @@ other = "{{ .PublishDate.Format \"January 2, 2006\" }}"
 
 [readmore]
 other = "Read More…"
+
+[draft]
+other = "draft"

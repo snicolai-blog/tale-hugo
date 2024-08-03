@@ -3,11 +3,15 @@
     {{- if .Params.Author }}
         {{ .Params.Author }}
     {{- else }}
-        {{ .Site.Author.name }}
+        {{ .Site.Params.Author.name }}
     {{- end }}
 
     {{- if .PublishDate }}
         <br>
         <span>{{ i18n "on" }}&nbsp;</span><time datetime="{{ .PublishDate }}">{{ i18n "publishdate" . }}</time>
+    {{- end }}
+    {{- if .Params.draft }}
+        <br>
+        {{ i18n "draft" }}
     {{- end }}
 </div>
