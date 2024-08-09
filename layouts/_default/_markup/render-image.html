@@ -33,7 +33,7 @@
       {{ end -}}
     {{- end -}}
   {{- end -}}
-  {{- with $src }}{{ .RelPermalink }} {{ $imgWidth }}w{{ end }}' 
+  {{ $src.RelPermalink }} {{ $imgWidth }}w' 
   {{ with $scratch.Get "src" -}}
     src='{{- . -}}'
   {{- else -}}
