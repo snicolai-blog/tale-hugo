@@ -44,5 +44,5 @@
 </figure>
 
 {{- else }}
-{{- errorf .Destination " does not exist" .Page.Title }}
+{{- errorf (printf "%s does not exist in page %s" .Destination .Page.Title) }}
 {{- end }}
