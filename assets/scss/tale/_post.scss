@@ -49,6 +49,11 @@
     text-align: center;
   }
 
+  figure {
+    margin-inline-start: 16px;
+    margin-inline-end: 16px;
+  }
+
   // CSS for making emoji inline
   img.emoji {
     display: inline-block;
