@@ -36,4 +36,15 @@
     display: block;
     width: 2rem;
   }
+
+  &-item-text {
+    border-bottom: none;
+    color: #555;
+  }
+
+  &-readmore {
+    display: flex; 
+    justify-content: flex-end;
+  }
+
 }

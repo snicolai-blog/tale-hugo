@@ -66,3 +66,25 @@
     margin: 0;
   }
 }
+
+.list-post {
+  padding: 2px;
+}
+
+video {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  max-width: 720px;
+}
+
+audio {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  max-width: 720px;
+}
