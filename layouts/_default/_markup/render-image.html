@@ -15,7 +15,8 @@
 {{- $scratch := newScratch -}} 
 {{- /* only use images smaller than or equal to the src (original) image size, as Hugo will upscale small images */ -}}
 <figure>
-<img loading="lazy"
+  <a name='{{- with .Title }}{{ urls.Anchorize . }}{{ else }}{{ with .Text }}{{ urls.Anchorize . -}}{{ end }}{{ end }}'>
+  <img loading="lazy"
   style='aspect-ratio: {{- $imgWidth -}}/{{- $imgHeight -}}'
   sizes='(max-width: 800px) 96vw, 768px'
   srcset='
@@ -40,9 +41,9 @@
     src='{{- $src.RelPermalink -}}'
   {{- end -}}
   {{- with .Text }} alt="{{- . | safeHTMLAttr -}}"{{ else }}alt=""{{ end }}>
-  <figcaption>{{- with .Title }}{{ . | safeHTML}}{{ else }}{{ with .Text }}{{ . | safeHTML }}{{ end }}{{ end }}</figcaption>
+</a>
+<figcaption>{{- with .Title }}{{ . | safeHTML}}{{ else }}{{ with .Text }}{{ . | safeHTML }}{{ end }}{{ end }}</figcaption>
 </figure>
-
 {{- else }}
 {{- errorf (printf "%s does not exist in page %s" .Destination .Page.Title) }}
 {{- end }}
