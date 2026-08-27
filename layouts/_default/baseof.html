@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en" }}">
+{{- $lang := "en" -}}
+{{- if ge hugo.Version "0.158" -}}
+{{-   $lang := .Language.Locale | default "en" -}}
+{{- else -}}
+{{-   $lang := .Site.LanguageCode | default "en" -}}
+{{- end -}}
+<html lang="{{ $lang }}">
     {{ partial "head.html" . }}
     <body>
         {{ partial "header.html" . }}

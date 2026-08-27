@@ -13,6 +13,12 @@
 {{- end -}}
 
 {{- $scratch := newScratch -}} 
+
+{{- $descpath := printf "%s%s" (path.BaseName $src) ".desc" }}
+{{- with .Page.Resources.GetMatch (printf "%s" $descpath) -}}
+  {{- $scratch.Set "description" .Content -}}
+{{- end -}}
+
 {{- /* only use images smaller than or equal to the src (original) image size, as Hugo will upscale small images */ -}}
 <figure>
   <a name='{{- with .Title }}{{ urls.Anchorize . }}{{ else }}{{ with .Text }}{{ urls.Anchorize . -}}{{ end }}{{ end }}'>
@@ -40,7 +46,8 @@
   {{- else -}}
     src='{{- $src.RelPermalink -}}'
   {{- end -}}
-  {{- with .Text }} alt="{{- . | safeHTMLAttr -}}"{{ else }}alt=""{{ end }}>
+  {{- with .Text }} alt="{{ . | safeHTMLAttr -}}"{{ else }}alt=""{{ end -}}
+  {{- with $scratch.Get "description" }} aria-description="{{ . | safeHTMLAttr }}"{{ end }}>
 </a>
 <figcaption>{{- with .Title }}{{ . | safeHTML}}{{ else }}{{ with .Text }}{{ . | safeHTML }}{{ end }}{{ end }}</figcaption>
 </figure>
