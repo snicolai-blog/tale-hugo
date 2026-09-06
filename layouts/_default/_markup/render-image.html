@@ -4,11 +4,21 @@
 
 {{- $imgWidth := $src.Width -}}
 {{- $imgHeight := $src.Height -}}
-{{- with $src.Exif -}}
-  {{- $o := .Tags.Orientation | int -}}
-  {{- if or (eq $o 5) (eq $o 6) (eq $o 7) (eq $o 8) -}}
-    {{- $imgWidth = $src.Height -}}
-    {{- $imgHeight = $src.Width -}}
+{{- if ge hugo.Version "0.155" -}}
+  {{- with $src.Meta -}}
+    {{- $o := .Orientation | int -}}
+    {{- if or (eq $o 5) (eq $o 6) (eq $o 7) (eq $o 8) -}}
+      {{- $imgWidth = $src.Height -}}
+      {{- $imgHeight = $src.Width -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- with $src.Exif -}}
+    {{- $o := .Tags.Orientation | int -}}
+    {{- if or (eq $o 5) (eq $o 6) (eq $o 7) (eq $o 8) -}}
+      {{- $imgWidth = $src.Height -}}
+      {{- $imgHeight = $src.Width -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
